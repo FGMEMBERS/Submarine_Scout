@@ -2,7 +2,7 @@
 ##
 ## Submarine Scout airship
 ##
-##  Copyright (C) 2007 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+##  Copyright (C) 2007 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
 ##  This file is licensed under the GPL license v2 or later.
 ##
 ###############################################################################
@@ -85,8 +85,7 @@ setlistener("/sim/signals/fdm-initialized", func {
 
 ###############################################################################
 # Initialize scenario network for full participation.
-io.load_nasal(getprop("/sim/fg-root") ~
-              "/Aircraft/Submarine_Scout/Systems/scenario-network.nas",
+io.load_nasal(getprop("/sim/aircraft-dir") ~ "/Systems/scenario-network.nas",
               "SubmarineScout");
 scenario_network_init(1);
 
@@ -464,9 +463,9 @@ var dialog = {
         content.set("default-padding", 5);
         props.globals.initNode("sim/about/text",
              "Royal Naval Air Service Submarine Scout Zero airship for FlightGear\n" ~
-             "Copyright (C) 2007 - 2011  Anders Gidenstam\n\n" ~
+             "Copyright (C) 2007 - 2012  Anders Gidenstam\n\n" ~
              "FlightGear flight simulator\n" ~
-             "Copyright (C) 1996 - 2011  http://www.flightgear.org\n\n" ~
+             "Copyright (C) 1996 - 2012  http://www.flightgear.org\n\n" ~
              "This is free software, and you are welcome to\n" ~
              "redistribute it under certain conditions.\n" ~
              "See the GNU GENERAL PUBLIC LICENSE Version 2 for the details.",
