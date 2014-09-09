@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+  Submarine Scout class airship. Multiplayer observer view.
+
+  Copyright (C) 2007 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<!--
+  Usage: fgfs - -prop:/sim/remote/pilot-callsign="callsign" - -aircraft=Submarine_Scout-observer
+-->
+<PropertyList>
+
+ <sim>
+
+  <description>Submarine Scout Zero airship multiplayer observer</description>
+  <author>Anders Gidenstam</author>
+  <aircraft-version>$Id: Submarine_Scout-observer-set.xml,v 1.15 2011-05-26 18:46:09 anders Exp $</aircraft-version>
+
+  <status type="string">beta</status>
+  <!-- rating>
+   <FDM type="int">2</FDM>
+   <systems type="int">3</systems>
+   <cockpit type="int">3</cockpit>
+   <model type="int">3</model>
+  </rating -->
+
+  <flight-model>null</flight-model>
+
+  <model>
+   <path>Aircraft/Submarine_Scout/Models/Submarine_Scout-observer.xml</path>
+  </model>
+
+  <presets>
+   <onground>true</onground>
+  </presets>
+  <startup>
+   <splash-texture>Aircraft/Submarine_Scout/splash.png</splash-texture>
+  </startup>
+
+  <view n="0">
+   <name>W/T operator</name>
+   <type>lookfrom</type>
+   <internal type="bool">true</internal>
+   <config>
+    <from-model type="bool">false</from-model>
+    <from-model-idx type="int">0</from-model-idx>
+    <eye-lat-deg-path>/position/latitude-deg</eye-lat-deg-path>
+    <eye-lon-deg-path>/position/longitude-deg</eye-lon-deg-path>
+    <eye-alt-ft-path>/position/altitude-ft</eye-alt-ft-path>
+    <eye-heading-deg-path>/orientation/heading-deg</eye-heading-deg-path>
+    <eye-pitch-deg-path>/orientation/pitch-deg</eye-pitch-deg-path>
+    <eye-roll-deg-path>/orientation/roll-deg</eye-roll-deg-path>
+
+    <!-- x/y/z == right/up/back -->
+    <x-offset-m type="double"> 0.05 </x-offset-m>
+    <y-offset-m type="double"> 0.40 </y-offset-m>
+    <z-offset-m type="double"> 1.4 </z-offset-m>
+    <ground-level-nearplane-m type="double"> 0.1f </ground-level-nearplane-m>
+   </config>
+  </view>
+
+  <view n="1">
+   <config>
+    <at-model type="bool">false</at-model>
+   </config>
+  </view>
+  <view n="2">
+   <config>
+    <at-model type="bool">false</at-model>
+   </config>
+  </view>
+  <view n="3">
+   <config>
+    <at-model type="bool">false</at-model>
+   </config>
+  </view>
+  <view n="4">
+   <config>
+    <at-model type="bool">false</at-model>
+   </config>
+  </view>
+  <view n="5">
+   <config>
+    <at-model type="bool">false</at-model>
+   </config>
+  </view>
+  <view n="6">
+   <config>
+    <at-model type="bool">false</at-model>
+   </config>
+  </view>
+
+  <sound>
+   <audible>false</audible>
+   <path/>
+  </sound>
+
+  <systems>
+   <electrical>
+    <path/>
+   </electrical>
+  </systems>
+  <instrumentation>
+   <path/>
+  </instrumentation>
+
+  <menubar>
+   <default>
+    <menu n="100">
+     <label>Submarine Scout</label>
+     <item>
+      <label>Select MP-pilot</label>
+      <binding>
+       <command>nasal</command>
+       <script>
+        dual_control_tools.
+          copilot_dialog.show(aircraft_dual_control.pilot_type);
+       </script>
+      </binding>
+     </item>
+     <!-- item>
+      <label>About</label>
+      <binding>
+       <command>nasal</command>
+       <script>SubmarineScout.about()</script>
+      </binding>
+     </item -->
+    </menu>
+   </default>
+  </menubar>
+
+ </sim>
+
+ <nasal>
+  <dual_control_tools>
+   <file>Aircraft/Generic/DualControl/dual-control-tools.nas</file>
+  </dual_control_tools>
+  <aircraft_dual_control>
+   <file>Aircraft/Submarine_Scout/Systems/submarine-scout-dual-control.nas</file>
+   <script>
+    # Disable the autopilot menu.
+    gui.menuEnable("autopilot", 0);
+   </script>
+  </aircraft_dual_control>
+  <dual_control>
+   <file>Aircraft/Generic/DualControl/copilot-dual-control.nas</file>
+  </dual_control>
+ </nasal>
+
+</PropertyList>

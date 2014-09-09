@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+  Submarine Scout class airship.
+
+  Copyright (C) 2007 - 2012  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <path>engine.ac</path>
+
+ <offsets>
+  <!-- x/y/z == back/right/up -->
+  <x-m> 0.00 </x-m>
+  <y-m> 0.00 </y-m>
+  <z-m> 0.00 </z-m>
+  <heading-deg> 180.0 </heading-deg>
+ </offsets>
+
+ <model>
+  <name>Propeller_</name>
+  <path>Aircraft/Submarine_Scout/Models/propeller.xml</path>
+  <offsets>
+   <heading-deg>180</heading-deg>
+   <x-m> -0.15 </x-m>
+   <y-m>  0.00 </y-m>
+   <z-m>  0.00 </z-m>
+  </offsets>
+ </model>
+
+ <!-- Shaders -->
+ <animation>
+  <type>shader</type>
+  <shader>chrome</shader>
+  <texture>chrome2.png</texture>
+  <object-name>engine_body</object-name>
+  <object-name>carburetor.1</object-name>
+  <object-name>carburetor.2</object-name>
+  <object-name>exhaust</object-name>
+  <object-name>exhaust.1</object-name>
+  <object-name>exhaust.2</object-name>
+ </animation>
+ <animation>
+  <type>shader</type>
+  <shader>chrome</shader>
+  <texture>brass.png</texture>
+  <object-name>cam_shaft</object-name>
+ </animation>
+ <animation>
+  <type>shader</type>
+  <shader>chrome</shader>
+  <texture>copper.png</texture>
+  <object-name>intake.1</object-name>
+  <object-name>intake.2</object-name>
+ </animation>
+
+</PropertyList>

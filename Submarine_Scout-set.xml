@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+<!--
+  Submarine Scout class airship.
+
+  Copyright (C) 2007 - 2011  Anders Gidenstam  (anders(at)gidenstam.org)
+  This file is licensed under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <sim>
+
+  <description>Royal Naval Air Service Submarine Scout Zero airship</description>
+  <author>Anders Gidenstam</author>
+  <aircraft-version>$Id: Submarine_Scout-set.xml,v 1.46 2011-05-26 18:46:09 anders Exp $</aircraft-version>
+  
+  <status type="string">beta</status>
+  <rating>
+   <FDM type="int">2</FDM>
+   <systems type="int">3</systems>
+   <cockpit type="int">3</cockpit>
+   <model type="int">3</model>
+  </rating>
+
+  <flight-model>jsb</flight-model>
+  <aero>Submarine_Scout</aero>
+
+  <presets>
+   <onground type="bool">true</onground>
+   <!-- altitude-agl-ft type="double">6.0</altitude-agl-ft -->
+  </presets>
+  <startup>
+   <splash-texture>Aircraft/Submarine_Scout/splash.png</splash-texture>
+  </startup>
+
+  <!-- 3d model -->
+  <model>
+   <path>Aircraft/Submarine_Scout/Models/Submarine_Scout.xml</path>
+   <!-- Some instruments are borrowed from the Sopwith Camel. -->
+   <camel>
+    <extra-details archive="y" type="bool">true</extra-details>
+   </camel>
+  </model>
+
+  <!-- Views -->
+  <view n="0">
+   <!-- Pilot's position. -->
+   <name>Pilot</name>
+   <internal>true</internal>
+   <config>
+    <!-- x/y/z == right/up/back -->
+    <x-offset-m type="double"> -0.10 </x-offset-m>
+    <y-offset-m type="double">  0.45 </y-offset-m>
+    <z-offset-m type="double">  2.80 </z-offset-m>
+    <pitch-offset-deg type="double"> -15 </pitch-offset-deg>
+   </config>
+  </view>
+
+  <view n="100">
+   <name>W/T operator</name>
+   <type>lookfrom</type>
+   <internal type="bool">true</internal>
+   <config>
+    <from-model type="bool">true</from-model>
+    <from-model-idx type="int">0</from-model-idx>
+    <!-- x/y/z == right/up/back -->
+    <x-offset-m type="double"> 0.05 </x-offset-m>
+    <y-offset-m type="double"> 0.40 </y-offset-m>
+    <z-offset-m type="double"> 1.4 </z-offset-m>
+   </config>
+  </view>
+
+  <view n="101">
+   <name>Mechanic</name>
+   <type>lookfrom</type>
+   <internal type="bool">true</internal>
+   <config>
+    <from-model type="bool">true</from-model>
+    <from-model-idx type="int">0</from-model-idx>
+    <!-- x/y/z == right/up/back -->
+    <x-offset-m type="double"> 0.05 </x-offset-m>
+    <y-offset-m type="double"> 0.40 </y-offset-m>
+    <z-offset-m type="double"> 3.4 </z-offset-m>
+    <heading-offset-deg type="double"> 180 </heading-offset-deg>
+    <default-heading-offset-deg type="double"> 180 </default-heading-offset-deg>
+    <pitch-offset-deg type="double"> -5 </pitch-offset-deg>
+   </config>
+  </view>
+
+  <chase-distance-m type="double">-60.0</chase-distance-m>
+
+  <sound>
+   <audible>true</audible>
+   <path>Aircraft/Submarine_Scout/Sounds/Submarine_Scout-sound.xml</path>
+  </sound>
+
+  <!-- Aircraft specific help. -->
+  <help include="help.xml"/>
+
+  <systems>
+   <electrical>
+    <path/>
+   </electrical>
+  </systems>
+  <instrumentation>
+   <path>Aircraft/Submarine_Scout/Systems/instrumentation.xml</path>
+  </instrumentation>
+
+  <!-- Armament etc. -->
+  <submodels>
+   <serviceable type="bool">true</serviceable>
+   <path>Aircraft/Submarine_Scout/Models/Submarine_Scout-submodels.xml</path>
+  </submodels>
+
+  <multiplay>
+   <generic>
+    <float n="0" alias="/fdm/jsbsim/animation/envelope-shape-norm"/>
+    <float n="1" type="double"/>  <!-- ALDIS lamp heading. -->
+    <float n="2" type="double"/>  <!-- ALDIS lamp pitch. -->
+    <int   n="2" type="int"/>     <!-- ALDIS lamp on. -->
+    <string n="0" type="string"/> <!-- BroadcastChannel -->
+   </generic>
+  </multiplay>
+
+  <max-simtime-per-frame n="0" type="double">0.1</max-simtime-per-frame>
+
+  <menubar>
+   <default>
+    <menu n="100">
+     <label>Submarine Scout</label>
+     <item>
+      <label>About</label>
+      <binding>
+       <command>nasal</command>
+       <script>SubmarineScout.about()</script>
+      </binding>
+     </item>
+    </menu>
+   </default>
+  </menubar>
+
+ </sim>
+
+ <controls>
+  <armament>
+   <!-- Left side -->
+   <station n="0">
+    <present alias="/sim/multiplay/generic/int[0]"/>
+   </station>
+   <!-- Right side -->
+   <station n="1">
+    <present alias="/sim/multiplay/generic/int[1]"/>
+   </station>
+   <training-mode type="bool">false</training-mode> 
+  </armament>
+ </controls>
+
+ <payload>
+  <weight>
+   <name type="string">Ballast</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[0]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">2000.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Bomb</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[3]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">200.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Bomb</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[4]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">200.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">W/T Operator</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[5]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">300.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Pilot</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[6]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">300.0</max-lb>
+  </weight>
+  <weight>
+   <name type="string">Mechanic</name>
+   <weight-lb alias="/fdm/jsbsim/inertia/pointmass-weight-lbs[7]"/>
+   <min-lb type="double">0.0</min-lb>
+   <max-lb type="double">300.0</max-lb>
+  </weight>
+ </payload>
+
+ <instrumentation n="0">
+  <gas-manometer n="0">
+   <serviceable type="bool">true</serviceable>
+  </gas-manometer>
+  <gas-manometer n="1">
+   <serviceable type="bool">true</serviceable>
+  </gas-manometer>
+ </instrumentation>
+
+ <nasal>
+  <SubmarineScout>
+   <file>Aircraft/Submarine_Scout/Systems/electrical.nas</file>
+   <file>Aircraft/Submarine_Scout/Systems/submarine-scout.nas</file>
+  </SubmarineScout>
+ </nasal>
+
+ <input>
+  <keyboard>
+   <!-- Keyboard commands -->
+
+   <!-- Ballast commands ====================================== -->
+   <key n="87"> 
+    <name>W</name>
+    <desc>Perform on-ground weigh-off.</desc>
+    <binding> 
+     <command>nasal</command>
+     <script>
+      SubmarineScout.auto_weighoff();
+     </script>     
+    </binding>
+   </key>
+
+   <key n="119">
+    <name>w</name>
+    <desc>Show current on-ground weight.</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+      SubmarineScout.print_wow();
+     </script>
+    </binding>
+   </key>
+
+   <key n="100">
+    <name>d</name>
+    <desc>Drop 5 lbs ballast</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+     <command>nasal</command>
+     <script>
+       gui.popupTip("Dropping ballast!");
+       SubmarineScout.drop_ballast(5);
+     </script>
+    </binding>
+   </key>
+
+   <key n="68">
+    <name>D</name>
+    <desc>Drop 50 lbs ballast</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+     <command>nasal</command>
+     <script>
+       gui.popupTip("Dropping ballast!");
+       SubmarineScout.drop_ballast(50);
+     </script>
+    </binding>
+   </key>
+
+   <!-- Gas cell commands ====================================== -->
+   <key n="70">
+    <name>F</name>
+    <desc>Open gas valve.</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+       gui.popupTip("Gas valve open!");
+       setprop(SubmarineScout.gas_valve_p, 1.00);
+     </script>
+    </binding>
+   </key>
+
+   <key n="102">
+    <name>f</name>
+    <desc>Close gas valve.</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+       gui.popupTip("Gas valve closed!");
+       setprop(SubmarineScout.gas_valve_p, 0.00);
+     </script>
+    </binding>
+   </key>
+
+   <key n="82">
+    <name>R</name>
+    <desc>Rip envelope</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+       setprop("/sim/messages/pilot", "Ripping the envelope!");
+       setprop(SubmarineScout.rip_cord_p, 1.0);
+     </script>
+    </binding>
+   </key>
+
+   <!-- Ballonet commands ====================================== -->
+   <key n="113">
+    <name>q</name>
+    <desc>Close forward ballonet outflow valve</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+     <command>nasal</command>
+     <script>
+      <![CDATA[
+       var p = SubmarineScout.ballonet_outflow_valve_p[0];
+       var t = getprop(p) - 0.025;
+       if (t < 0.0) { t = 0.0; }
+       setprop(p, t);
+       gui.popupTip("Forward ballonet outflow " ~ int(100*t) ~ "% open.");
+      ]]>
+     </script>
+    </binding>
+   </key>
+   <key n="81">
+    <name>Q</name>
+    <desc>Open forward ballonet outflow valve</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+     <command>nasal</command>
+     <script>
+      <![CDATA[
+       var p = SubmarineScout.ballonet_outflow_valve_p[0];
+       var t = getprop(p) + 0.025;
+       if (t > 1.0) { t = 1.0; }
+       setprop(p, t);
+       gui.popupTip("Forward ballonet outflow " ~ int(100*t) ~ "% open.");
+      ]]>
+     </script>
+    </binding>
+   </key>
+   <key n="17">
+    <name>Ctrl-Q</name>
+    <desc>Open/Close forward ballonet inflow valve</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+      <![CDATA[
+       var p = SubmarineScout.ballonet_inflow_valve_p[0];
+       var v = getprop(p);
+       setprop(p, (v < 0.5 ? 1.0 : 0.0));
+       gui.popupTip("Forward ballonet inflow " ~
+                    (v < 0.5 ? "opened" : "closed") ~ ".");
+      ]]>
+     </script>
+    </binding>
+   </key>
+
+   <key n="97">
+    <name>a</name>
+    <desc>Close aft ballonet outflow valve</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+     <command>nasal</command>
+     <script>
+      <![CDATA[
+       var p = SubmarineScout.ballonet_outflow_valve_p[1];
+       var t = getprop(p) - 0.025;
+       if (t < 0.0) { t = 0.0; }
+       setprop(p, t);
+       gui.popupTip("Aft ballonet outflow " ~ int(100*t) ~ "% open.");
+      ]]>
+     </script>
+    </binding>
+   </key>
+   <key n="65">
+    <name>A</name>
+    <desc>Open aft ballonet outflow valve</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+     <command>nasal</command>
+     <script>
+      <![CDATA[
+       var p = SubmarineScout.ballonet_outflow_valve_p[1];
+       var t = getprop(p) + 0.025;
+       if (t > 1.0) { t = 1.0; }
+       setprop(p, t);
+       gui.popupTip("Aft ballonet outflow " ~ int(100*t) ~ "% open.");
+      ]]>
+     </script>
+    </binding>
+   </key>
+   <key n="1">
+    <name>Ctrl-A</name>
+    <desc>Open/Close aft ballonet inflow valve</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+      <![CDATA[
+       var p = SubmarineScout.ballonet_inflow_valve_p[1];
+       var v = getprop(p);
+       setprop(p, (v < 0.5 ? 1.0 : 0.0));
+       gui.popupTip("Aft ballonet inflow " ~
+                    (v < 0.5 ? "opened" : "closed") ~ ".");
+      ]]>
+     </script>
+    </binding>
+   </key>
+
+   <!-- Ground crew commands =================================== -->
+   <key n="85">
+    <name>U</name>
+    <desc>Request ground crew to prepare for landing.</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+       SubmarineScout.ground_crew.activate();
+     </script>
+    </binding>
+   </key>
+
+   <key n="89">
+    <name>Y</name>
+    <desc>Tell cround crew to release the handling guys.</desc>
+    <binding>
+     <command>nasal</command>
+     <script>
+       SubmarineScout.ground_crew.let_go();
+     </script>
+    </binding>
+   </key>
+
+  </keyboard>
+ </input>
+
+</PropertyList>
