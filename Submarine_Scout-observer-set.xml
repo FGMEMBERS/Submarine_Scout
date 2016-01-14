@@ -25,7 +25,7 @@
   </rating -->
 
   <flight-model>null</flight-model>
-
+  <variant-of>Submarine_Scout</variant-of>
   <model>
    <path>Aircraft/Submarine_Scout/Models/Submarine_Scout-observer.xml</path>
   </model>
